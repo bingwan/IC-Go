@@ -1,4 +1,4 @@
-module github.com/bingwan/IC-Go
+module github.com/mix-labs/IC-Go
 
 go 1.16
 
