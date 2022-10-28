@@ -6,14 +6,14 @@ import (
 	"math/big"
 	"testing"
 
+	"github.com/aviate-labs/candid-go/idl"
 	"github.com/fxamacker/cbor/v2"
 	"github.com/mix-labs/IC-Go/utils"
 	"github.com/mix-labs/IC-Go/utils/identity"
-	"github.com/mix-labs/IC-Go/utils/idl"
 	"github.com/mix-labs/IC-Go/utils/principal"
 )
 
-//EXT data structure
+// EXT data structure
 type supply struct {
 	Ok  uint64 `ic:"ok"`
 	Err string `ic:"err"`
@@ -40,7 +40,7 @@ type RegistryTuple struct {
 }
 type Registrys []RegistryTuple
 
-//PUNK data structure
+// PUNK data structure
 type principalOp struct {
 	Some principal.Principal `ic:"some"`
 	None uint8               `ic:"none"`
@@ -129,7 +129,7 @@ func TestAgent_QueryRaw(t *testing.T) {
 	// 	"a":[]interface{}{},
 	// 	"b":[]interface{}{},
 	// }
-	
+
 	// arg, _ := idl.Encode([]idl.Type{testRec}, []interface{}{testRecValue})
 	// fmt.Println(arg)
 	// methodName := "get_transactions"
@@ -143,6 +143,7 @@ func TestAgent_QueryRaw(t *testing.T) {
 
 	// arg, _ := idl.Encode([]idl.Type{idl.NewRec(rec)}, []interface{}{value})
 	// fmt.Println(arg, canisterID, methodName)
+
 	// _, result, errMsg, err := agent.Query(canisterID, methodName, arg)
 	// myresult := GetTransactionsResponseBorrowed{}
 	// utils.Decode(&myresult, result[0])
@@ -176,7 +177,7 @@ func TestAgent_QueryRaw(t *testing.T) {
 
 	methodName := "getAllToken"
 	canister := "cuvse-myaaa-aaaan-qas6a-cai"
-	arg, _ := idl.Encode([]idl.Type{idl.NewOpt(new(idl.Nat))}, []interface{}{nil})
+	arg, _ := idl.Encode([]idl.Type{idl.NewOptionalType(idl.NullType{})}, []interface{}{nil})
 	_, result, _, err := agent.Query(canister, methodName, arg)
 	if err != nil {
 		panic(err)
@@ -200,7 +201,7 @@ func TestAgent_UpdateRaw(t *testing.T) {
 	canisterID := "d24m2-dqaaa-aaaah-aa4zq-cai"
 	ag := New(false, "833fe62409237b9d62ec77587520911e9a759cec1d19755b7da901b96dca3d42")
 	methodName := "total"
-	arg, _ := idl.Encode([]idl.Type{new(idl.Null)}, []interface{}{nil})
+	arg, _ := idl.Encode([]idl.Type{idl.NullType{}}, []interface{}{nil})
 	_, result, err := ag.Update(canisterID, methodName, arg, 30)
 	if err != nil {
 		panic(err)
@@ -292,7 +293,7 @@ func TestAgent_GetCanisterTime(t *testing.T) {
 func TestAgent_GetCanisterCandid(t *testing.T) {
 	canisterID := "oeee4-qaaaa-aaaak-qaaeq-cai"
 	agent := New(false, "833fe62409237b9d62ec77587520911e9a759cec1d19755b7da901b96dca3d42")
-	arg, _ := idl.Encode([]idl.Type{new(idl.Null)}, []interface{}{nil})
+	arg, _ := idl.Encode([]idl.Type{idl.NullType{}}, []interface{}{nil})
 	methodName := "__get_candid_interface_tmp_hack"
 	_, result, err := agent.Update(canisterID, methodName, arg, 30)
 	if err != nil {

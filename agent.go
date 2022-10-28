@@ -3,18 +3,18 @@ package agent
 import (
 	"encoding/hex"
 	"fmt"
-	"time"
-
+	"github.com/aviate-labs/candid-go/idl"
 	"github.com/fxamacker/cbor/v2"
 	"github.com/mix-labs/IC-Go/utils/identity"
-	"github.com/mix-labs/IC-Go/utils/idl"
 	"github.com/mix-labs/IC-Go/utils/principal"
+	"time"
+
 )
 
 type Agent struct {
 	client        *Client
 	identity      *identity.Identity
-	ingressExpiry time.Duration
+	ingressExpiry  time.Duration
 	rootKey       []byte //ICP root identity
 }
 
